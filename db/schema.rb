@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2022_03_20_025652) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.decimal "recommended"
+    t.integer "recommended"
     t.string "comment"
     t.integer "lesson_id", null: false
     t.index ["lesson_id"], name: "index_reviews_on_lesson_id"

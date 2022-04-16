@@ -12,6 +12,7 @@ class LessonsController < ApplicationController
 
   # POST /lessons
   def create
+    print(lesson_params)
     @lesson = Lesson.new(lesson_params)
     if @lesson.save
       lessons = Lesson.all
@@ -46,6 +47,6 @@ class LessonsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def lesson_params
-      params.permit(:name, :description, :grade, :subject, :content)
+      params[:lesson].permit(:name, :description, :grade, :subject, content:"eh")
     end
 end

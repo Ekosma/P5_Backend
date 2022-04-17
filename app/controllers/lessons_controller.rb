@@ -7,6 +7,7 @@ class LessonsController < ApplicationController
 
   # GET /lessons/1
   def show
+    set_lesson
     render json: @lesson
   end
 

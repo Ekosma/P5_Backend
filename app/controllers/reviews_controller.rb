@@ -7,14 +7,15 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/1
   def show
-    render json: @review
+    @reviews = Review.where("lesson_id = ?", params[:id])
+    render json: @reviews
   end
 
   # POST /reviews
   def create
     @review = Review.new(review_params)
     if @review.save
-      review = Review.where("lesson_id = ?", @review.lesson_id)
+      reviews = Review.where("lesson_id = ?", @review.lesson_id)
       render json: reviews, status: :created, location: @reviews
     else
       render json: @review.errors, status: :unprocessable_entity
@@ -46,7 +47,7 @@ class ReviewsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def review_params
-      params.permit(:recommended, :comment, :lesson_id)
+      params[:comment].permit(:recommended, :comment, :lesson_id)
     end
 end
-end
+

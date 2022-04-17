@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_20_025652) do
+ActiveRecord::Schema.define(version: 2022_04_17_050909) do
 
   create_table "lessons", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.string "grade"
     t.string "subject"
-    t.string "content"
+    t.binary "content"
   end
 
   create_table "reviews", force: :cascade do |t|

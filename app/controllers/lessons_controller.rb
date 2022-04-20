@@ -3,12 +3,7 @@ require "base64"
 class LessonsController < ApplicationController
   # GET /lessons
   def index
-    lessons = Lesson.all.map{ |lesson| 
-      lesson[:content] = Base64.encode64(lesson[:content])
-      lesson
-    }
-    print('hi',lessons)
-    render json: lessons
+    render json: to_base64
   end
 
   # GET /lessons/1
@@ -25,11 +20,7 @@ class LessonsController < ApplicationController
     @lesson_params[:content] = @lesson_params[:content].read
     @lesson = Lesson.new(@lesson_params)
     if @lesson.save
-      lessons = Lesson.all.map{ |lesson| 
-        lesson[:content] = Base64.encode64(lesson[:content])
-        lesson
-      }
-      render json: lessons, status: :created, location: @lessons
+      render json: to_base64, status: :created, location: @lessons
     else
       render json: @lesson.errors, status: :unprocessable_entity
     end
@@ -55,12 +46,20 @@ class LessonsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_lesson
-      print('here')
       @lesson = Lesson.find(params[:id])
+      @lesson[:content] = Base64.encode64(@lesson[:content]) 
+      @lesson
     end
 
     # Only allow a list of trusted parameters through.
     def lesson_params
       params.permit(:name, :description, :grade, :subject, :content)
+    end
+
+    def to_base64
+      Lesson.all.map{ |lesson| 
+        lesson[:content] = Base64.encode64(lesson[:content]) 
+        lesson 
+      }
     end
 end

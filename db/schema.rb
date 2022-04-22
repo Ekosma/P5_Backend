@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_17_050909) do
+ActiveRecord::Schema.define(version: 2022_04_22_013657) do
 
   create_table "lessons", force: :cascade do |t|
     t.string "name"
@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(version: 2022_04_17_050909) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer "recommended"
     t.string "comment"
     t.integer "lesson_id", null: false
     t.index ["lesson_id"], name: "index_reviews_on_lesson_id"

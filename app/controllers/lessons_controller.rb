@@ -3,7 +3,7 @@ require "base64"
 class LessonsController < ApplicationController
   # GET /lessons
   def index
-    render json: to_base64
+    render json: no_PDF
   end
 
   # GET /lessons/1
@@ -56,9 +56,16 @@ class LessonsController < ApplicationController
       params.permit(:name, :description, :grade, :subject, :content)
     end
 
-    def to_base64
+    #def to_base64
+    #  Lesson.all.map{ |lesson| 
+    #    lesson[:content] = Base64.encode64(lesson[:content]) 
+    #    lesson 
+    #  }
+    #end
+
+    def no_PDF
       Lesson.all.map{ |lesson| 
-        lesson[:content] = Base64.encode64(lesson[:content]) 
+        lesson[:content] = nil
         lesson 
       }
     end

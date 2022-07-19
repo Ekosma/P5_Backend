@@ -15,7 +15,7 @@ class LessonsController < ApplicationController
   # POST /lessons
   def create
     print(lesson_params)
-    @lesson_params = lesson_params
+    @lesson_params = lit -esson_params
     @lesson_params[:content] = @lesson_params[:content].read
     @lesson = Lesson.new(@lesson_params)
     if @lesson.save
